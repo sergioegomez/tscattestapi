@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wiki – TSCAT SOAP API Tests</title>
+  <style>
+    :root {
+      --bg:        #f7f8fa;
+      --surface:   #ffffff;
+      --border:    #e2e6ea;
+      --primary:   #1a56db;
+      --primary-l: #e8f0fe;
+      --accent:    #0e9f6e;
+      --accent-l:  #d8f3e8;
+      --warn:      #c27803;
+      --warn-l:    #fdf3c1;
+      --muted:     #6b7280;
+      --text:      #111827;
+      --code-bg:   #1e2432;
+      --code-fg:   #cdd5e0;
+      --radius:    8px;
+      --shadow:    0 1px 4px rgba(0,0,0,.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 15px; line-height: 1.65;
+      background: var(--bg); color: var(--text);
+      display: flex; min-height: 100vh;
+    }
+
+    /* ── SIDEBAR ─────────────────────────────────────────── */
+    nav {
+      width: 240px; flex-shrink: 0;
+      background: var(--surface); border-right: 1px solid var(--border);
+      padding: 28px 16px; position: sticky; top: 0; height: 100vh;
+      overflow-y: auto;
+    }
+    nav .logo {
+      font-size: 13px; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--primary);
+      margin-bottom: 24px; display: flex; align-items: center; gap: 8px;
+    }
+    nav .logo svg { width: 20px; height: 20px; }
+    nav h3 { font-size: 11px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--muted); margin: 20px 0 6px; }
+    nav a {
+      display: block; padding: 5px 10px; border-radius: 5px;
+      color: var(--text); text-decoration: none; font-size: 13.5px;
+      transition: background .15s;
+    }
+    nav a:hover { background: var(--primary-l); color: var(--primary); }
+
+    /* ── MAIN ────────────────────────────────────────────── */
+    main { flex: 1; max-width: 900px; padding: 40px 48px; }
+
+    h1 { font-size: 28px; font-weight: 800; margin-bottom: 6px; color: var(--text); }
+    h2 {
+      font-size: 20px; font-weight: 700; margin: 48px 0 14px;
+      padding-bottom: 8px; border-bottom: 2px solid var(--border);
+      scroll-margin-top: 24px;
+    }
+    h3 { font-size: 15px; font-weight: 700; margin: 24px 0 8px; }
+    p  { margin-bottom: 12px; }
+
+    /* hero subtitle */
+    .subtitle { color: var(--muted); font-size: 15px; margin-bottom: 32px; }
+
+    /* ── BADGES ──────────────────────────────────────────── */
+    .badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 2px 8px; border-radius: 20px;
+      font-size: 11.5px; font-weight: 600; white-space: nowrap;
+    }
+    .badge-ws  { background: var(--primary-l); color: var(--primary); }
+    .badge-gf  { background: var(--accent-l);  color: #065f46; }
+    .badge-rec { background: var(--warn-l);    color: var(--warn); }
+
+    /* ── CODE ────────────────────────────────────────────── */
+    pre, code {
+      font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    }
+    code { font-size: 12.5px; }
+    pre {
+      background: var(--code-bg); color: var(--code-fg);
+      padding: 16px 20px; border-radius: var(--radius);
+      overflow-x: auto; font-size: 13px; line-height: 1.6;
+      margin: 12px 0 20px;
+    }
+    pre .comment { color: #6b7fa3; }
+    pre .cmd     { color: #7ec8e3; }
+    pre .flag    { color: #f9c74f; }
+    pre .kw      { color: #c792ea; }
+    pre .str     { color: #c3e88d; }
+    :not(pre) > code {
+      background: #eef0f3; color: #c0392b;
+      padding: 1px 5px; border-radius: 4px;
+    }
+
+    /* ── CALLOUTS ────────────────────────────────────────── */
+    .callout {
+      border-left: 4px solid; border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 12px 16px; margin: 16px 0;
+    }
+    .callout.info  { border-color: var(--primary); background: var(--primary-l); }
+    .callout.tip   { border-color: var(--accent);  background: var(--accent-l);  }
+    .callout.warn  { border-color: var(--warn);    background: var(--warn-l);    }
+    .callout .title { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+
+    /* ── TABLES ──────────────────────────────────────────── */
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 16px 0 24px; }
+    thead tr { background: #f1f3f5; }
+    th { text-align: left; padding: 9px 12px; font-weight: 700;
+         border-bottom: 2px solid var(--border); }
+    td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:hover td { background: #fafbfc; }
+    td code { font-size: 12px; }
+
+    /* ── FLOW DIAGRAM ────────────────────────────────────── */
+    .flow {
+      display: flex; align-items: center; gap: 0;
+      flex-wrap: wrap; margin: 20px 0 28px;
+    }
+    .flow-box {
+      background: var(--surface); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 10px 14px;
+      font-size: 13px; text-align: center; min-width: 120px;
+      box-shadow: var(--shadow);
+    }
+    .flow-box .label { font-weight: 700; color: var(--text); }
+    .flow-box .sub   { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .flow-box.blue   { border-color: var(--primary); background: var(--primary-l); }
+    .flow-box.green  { border-color: var(--accent);  background: var(--accent-l);  }
+    .flow-box.yellow { border-color: var(--warn);    background: var(--warn-l);    }
+    .flow-arrow {
+      font-size: 20px; color: var(--muted); padding: 0 8px; user-select: none;
+    }
+
+    /* ── STRUCTURE ───────────────────────────────────────── */
+    .tree {
+      background: var(--code-bg); color: var(--code-fg);
+      padding: 16px 20px; border-radius: var(--radius);
+      font-family: monospace; font-size: 13px; line-height: 1.8;
+      margin: 12px 0 20px;
+    }
+    .tree .dir  { color: #7ec8e3; font-weight: 700; }
+    .tree .file { color: var(--code-fg); }
+    .tree .note { color: #6b7fa3; }
+
+    /* ── STEP PILLS ──────────────────────────────────────── */
+    .steps { display: flex; flex-direction: column; gap: 12px; margin: 16px 0 24px; }
+    .step  { display: flex; gap: 14px; align-items: flex-start; }
+    .step-num {
+      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+      background: var(--primary); color: #fff;
+      font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-body { flex: 1; }
+    .step-body strong { display: block; margin-bottom: 2px; }
+
+    footer {
+      margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border);
+      color: var(--muted); font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── SIDEBAR ─────────────────────────────────────────────────────────── -->
+<nav>
+  <div class="logo">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="2" y="3" width="16" height="14" rx="2"/>
+      <path d="M6 7h8M6 10h5M6 13h3"/>
+    </svg>
+    TSCAT API Tests
+  </div>
+
+  <h3>Introducción</h3>
+  <a href="#que-es">¿Qué es este proyecto?</a>
+  <a href="#arquitectura">Arquitectura</a>
+
+  <h3>Cómo funciona</h3>
+  <a href="#golden-file">Patrón Golden File</a>
+  <a href="#flujo">Flujo de ejecución</a>
+  <a href="#campos-dinamicos">Campos dinámicos</a>
+
+  <h3>Endpoints</h3>
+  <a href="#endpoints">Tabla de operaciones</a>
+  <a href="#ws-directo">WS directo (preprod)</a>
+  <a href="#gestor-formularis">GestorFormularis</a>
+
+  <h3>Uso</h3>
+  <a href="#comandos">Comandos Maven</a>
+  <a href="#estructura">Estructura de ficheros</a>
+  <a href="#añadir-test">Añadir un test</a>
+</nav>
+
+<!-- ─── MAIN ────────────────────────────────────────────────────────────── -->
+<main>
+
+  <h1>TSCAT SOAP API Tests</h1>
+  <p class="subtitle">Validación automatizada de los endpoints del servicio <code>GSITWebService</code> mediante Karate y el patrón Golden File.</p>
+
+  <!-- ── QUÉ ES ─────────────────────────────────────────── -->
+  <h2 id="que-es">¿Qué es este proyecto?</h2>
+  <p>Suite de tests de regresión para el servicio SOAP <strong>GSITWebService</strong> (aggregator) de la plataforma TSCAT/GSIT. Cada test llama a un endpoint real, captura la respuesta XML completa y la compara contra una respuesta de referencia previamente guardada (<em>golden file</em>).</p>
+  <p>Ante cualquier cambio inesperado en un endpoint —un campo que desaparece, un valor que cambia, una estructura que se modifica— el test correspondiente falla, alertando del cambio antes de que llegue a producción.</p>
+
+  <div class="callout info">
+    <div class="title">Stack técnico</div>
+    Java 17 · Maven 3 · Karate 1.4.1 · JUnit 5 · GraalVM 24.1.1
+  </div>
+
+  <!-- ── ARQUITECTURA ────────────────────────────────────── -->
+  <h2 id="arquitectura">Arquitectura</h2>
+  <p>El servicio expone un único método WSDL (<code>aggregator</code>) que actúa como enrutador: el campo <code>Operation</code> del body determina qué lógica se ejecuta. Cada operación es, en la práctica, un endpoint independiente.</p>
+
+  <table>
+    <thead><tr><th>Capa</th><th>Componente</th><th>Responsabilidad</th></tr></thead>
+    <tbody>
+      <tr><td>Runner</td><td><code>SoapTest.java</code></td><td>Descubre y lanza todos los <code>.feature</code> del paquete <code>tscat.soap</code></td></tr>
+      <tr><td>Config</td><td><code>karate-config.js</code></td><td>Define URLs, SOAPAction, modo (record/compare) y timeouts</td></tr>
+      <tr><td>Helper</td><td><code>soap-helpers.js</code></td><td>Obtiene el response, normaliza el XML, guarda/lee golden files</td></tr>
+      <tr><td>Feature</td><td><code>*.feature</code></td><td>Un fichero por operación: request, validación de status y comparación XML</td></tr>
+      <tr><td>Requests</td><td><code>requests/*.xml</code></td><td>Body SOAP de cada llamada, extraído del proyecto SoapUI</td></tr>
+      <tr><td>Golden</td><td><code>golden/*.xml</code></td><td>Respuestas de referencia grabadas desde preprod</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ── GOLDEN FILE ─────────────────────────────────────── -->
+  <h2 id="golden-file">Patrón Golden File</h2>
+  <p>Un <strong>golden file</strong> es una respuesta real grabada en un momento en que el sistema está correcto. En ejecuciones posteriores, la respuesta actual se compara contra ese fichero: si coinciden, el test pasa; si difieren, falla.</p>
+
+  <div class="flow">
+    <div class="flow-box yellow">
+      <div class="label">1ª ejecución</div>
+      <div class="sub"><code>-Dmode=record</code></div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">
+      <div class="label">Llama al endpoint</div>
+      <div class="sub">response real de preprod</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box green">
+      <div class="label">Guarda golden file</div>
+      <div class="sub">XML normalizado en disco</div>
+    </div>
+  </div>
+
+  <div class="flow">
+    <div class="flow-box blue">
+      <div class="label">Ejecución normal</div>
+      <div class="sub"><code>-Dmode=compare</code></div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">
+      <div class="label">Llama al endpoint</div>
+      <div class="sub">response real de preprod</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box">
+      <div class="label">Normaliza XML</div>
+      <div class="sub">enmascara campos dinámicos</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box green">
+      <div class="label">match vs golden</div>
+      <div class="sub">✓ pasa | ✗ falla</div>
+    </div>
+  </div>
+
+  <!-- ── FLUJO ───────────────────────────────────────────── -->
+  <h2 id="flujo">Flujo de ejecución (por feature)</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <strong>HTTP POST al endpoint SOAP</strong>
+        Karate envía el body XML de <code>requests/</code> con las cabeceras <code>Content-Type: text/xml</code> y <code>SOAPAction</code>.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <strong><code>Then status 200</code></strong>
+        Falla inmediatamente si el servidor devuelve cualquier código distinto de 200.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <strong>Normalización del XML</strong>
+        <code>soap-helpers.js::normalizeXml(dynamicPaths)</code> obtiene los bytes del response, lo parsea con un DOM, reemplaza los XPaths configurados en <code>dynamicPaths</code> por el token <code>__DYNAMIC__</code> y serializa el árbol con indentación uniforme.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <strong>Record o compare</strong>
+        En modo <code>record</code>: guarda el XML normalizado como golden file.<br>
+        En modo <code>compare</code>: carga el golden file y lo compara con <code>match actualXml == expectedXml</code> (comparación estructural nodo a nodo).
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CAMPOS DINÁMICOS ───────────────────────────────── -->
+  <h2 id="campos-dinamicos">Campos dinámicos</h2>
+  <p>Algunos campos del response cambian en cada llamada (timestamps, IDs de sesión, fechas de creación…). Si se incluyeran en la comparación, los tests fallarían siempre aunque el contrato del servicio no haya cambiado.</p>
+  <p>Cada feature expone un array <code>dynamicPaths</code> en su <code>Background</code>. Añade las expresiones XPath de los campos que deban ignorarse:</p>
+
+  <pre><span class="comment"># En el Background del feature correspondiente:</span>
+<span class="kw">* def</span> dynamicPaths = [<span class="str">'//dataCreacio'</span>, <span class="str">'//timestamp'</span>, <span class="str">'//@sessionId'</span>]</pre>
+
+  <p>El helper reemplazará el contenido de esos nodos por <code>__DYNAMIC__</code> en ambos XMLs (actual y golden) antes de compararlos.</p>
+
+  <div class="callout warn">
+    <div class="title">Importante: re-graba el golden tras añadir dynamicPaths</div>
+    Si añades un nuevo XPath a <code>dynamicPaths</code>, el golden file existente aún contiene el valor real. Ejecuta <code>-Dmode=record</code> para regenerarlo con el token <code>__DYNAMIC__</code>.
+  </div>
+
+  <!-- ── ENDPOINTS ──────────────────────────────────────── -->
+  <h2 id="endpoints">Tabla de operaciones validadas</h2>
+  <p>Las 10 operaciones del proyecto SoapUI tienen su feature y su golden file correspondientes.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Operación SOAP</th>
+        <th>Endpoint</th>
+        <th>Parámetros clave</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>confJustLang</code></td>
+        <td>confConvoLang</td>
+        <td><span class="badge badge-gf">GestorFormularis</span></td>
+        <td>AG_EMT0059/0001_0001 · CATALA</td>
+      </tr>
+      <tr>
+        <td><code>queryAggTramit</code></td>
+        <td>queryAggTramit</td>
+        <td><span class="badge badge-gf">GestorFormularis</span></td>
+        <td>codiTramit: COSPE1 · ca_ES</td>
+      </tr>
+      <tr>
+        <td><code>queryAggTramitLang</code></td>
+        <td>queryAggTramitLang</td>
+        <td><span class="badge badge-ws">WS directo</span></td>
+        <td>codiTramit: TRI004 · CATALA</td>
+      </tr>
+      <tr>
+        <td><code>queryAggTramitJust</code></td>
+        <td>queryAggTramitJust</td>
+        <td><span class="badge badge-gf">GestorFormularis</span></td>
+        <td>codiTramit: TSCAT0 · CATALA</td>
+      </tr>
+      <tr>
+        <td><code>listJustLangJust</code></td>
+        <td>listJustLang</td>
+        <td><span class="badge badge-gf">GestorFormularis</span></td>
+        <td>ECF_2025_00003677_000000087 · JUST · TSCAT3</td>
+      </tr>
+      <tr>
+        <td><code>listJustLangApor</code></td>
+        <td>listJustLang</td>
+        <td><span class="badge badge-gf">GestorFormularis</span></td>
+        <td>EMT_2025_00000091_000000038 · APOR · TSCAT4</td>
+      </tr>
+      <tr>
+        <td><code>confConvoLang</code></td>
+        <td>confConvoLang</td>
+        <td><span class="badge badge-gf">GestorFormularis</span></td>
+        <td>AG_ECF0003/0683_0001 · TSCAT9 · CATALA</td>
+      </tr>
+      <tr>
+        <td><code>justMigracions</code></td>
+        <td>justMigracions</td>
+        <td><span class="badge badge-gf">GestorFormularis</span></td>
+        <td>CLT320/25/000001 · CATALA</td>
+      </tr>
+      <tr>
+        <td><code>readXMLCospe</code></td>
+        <td>leerXMLCospe</td>
+        <td><span class="badge badge-gf">GestorFormularis</span></td>
+        <td><em>sin InputJSON</em></td>
+      </tr>
+      <tr>
+        <td><code>confConvoLangWS</code></td>
+        <td>confConvoLang</td>
+        <td><span class="badge badge-ws">WS directo</span></td>
+        <td>AG_ECF0003/0683_0001 · SLT_2026_00000462 · TSCAT9</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 id="ws-directo">WS directo (preprod)</h3>
+  <pre><span class="str">https://preproduccio.eco.out.apps.gencat.cat/TSCAT_GSIT_API/GSITWebService.asmx</span></pre>
+  <p>Llamada SOAP 1.1 directa al servicio. Request mínimo: envelope con <code>Operation</code> e <code>InputJSON</code>.</p>
+
+  <h3 id="gestor-formularis">GestorFormularis</h3>
+  <pre><span class="str">https://configuracio.ovt.gencat.cat/gsitgf/AppJava/services/GestorFormularis</span></pre>
+  <p>El request se envuelve en <code>ser:ServeiNegociPeticio</code> con cabecera (<code>CodiTramit</code>, <code>Idioma</code>…) y el cuerpo <code>aggregator</code> va dentro de <code>cbo:consultaBo</code>. El SOAPAction es el mismo en ambos casos.</p>
+
+  <!-- ── COMANDOS ────────────────────────────────────────── -->
+  <h2 id="comandos">Comandos Maven</h2>
+
+  <h3>Primera ejecución — grabar golden files</h3>
+  <pre><span class="cmd">mvn</span> test <span class="flag">-Dtest</span>=SoapTest <span class="flag">-Dmode</span>=record</pre>
+  <p>Llama a los 10 endpoints contra preprod y guarda las respuestas XML normalizadas en <code>src/test/java/tscat/soap/golden/</code>. Commitalos al repositorio.</p>
+
+  <h3>Ejecución normal — comparar</h3>
+  <pre><span class="cmd">mvn</span> test <span class="flag">-Dtest</span>=SoapTest</pre>
+  <p>Llama a los 10 endpoints y compara cada respuesta contra su golden file. Si algún campo difiere, el test falla indicando el nodo exacto.</p>
+
+  <h3>Ejecutar un único test</h3>
+  <pre><span class="cmd">mvn</span> test <span class="flag">-Dtest</span>=SoapTest <span class="flag">-Dkarate.options</span>=<span class="str">"classpath:tscat/soap/confConvoLang.feature"</span></pre>
+
+  <h3>Regenerar un golden file concreto</h3>
+  <pre><span class="cmd">mvn</span> test <span class="flag">-Dtest</span>=SoapTest <span class="flag">-Dmode</span>=record <span class="flag">-Dkarate.options</span>=<span class="str">"classpath:tscat/soap/confConvoLang.feature"</span></pre>
+
+  <div class="callout tip">
+    <div class="title">Informe HTML de Karate</div>
+    Tras cada ejecución, el informe detallado con request/response y resultado de cada step está en <code>target/karate-reports/karate-summary.html</code>.
+  </div>
+
+  <!-- ── ESTRUCTURA ─────────────────────────────────────── -->
+  <h2 id="estructura">Estructura de ficheros</h2>
+
+  <div class="tree">
+<span class="dir">src/test/java/</span>
+├── <span class="file">karate-config.js</span>         <span class="note"># URLs, modo y timeouts globales</span>
+└── <span class="dir">tscat/</span>
+    ├── <span class="dir">api/</span>
+    │   ├── <span class="file">ApiTest.java</span>         <span class="note"># Runner tests REST existentes</span>
+    │   ├── <span class="file">users.feature</span>
+    │   └── <span class="file">posts.feature</span>
+    └── <span class="dir">soap/</span>
+        ├── <span class="file">SoapTest.java</span>        <span class="note"># Runner SOAP — ejecuta todos los .feature</span>
+        ├── <span class="file">soap-helpers.js</span>      <span class="note"># normalizeXml · saveGolden · getExpected</span>
+        ├── <span class="dir">requests/</span>            <span class="note"># Body XML de cada petición (del SoapUI)</span>
+        │   ├── <span class="file">confJustLang.xml</span>
+        │   ├── <span class="file">queryAggTramit.xml</span>
+        │   ├── <span class="file">queryAggTramitLang.xml</span>
+        │   ├── <span class="file">queryAggTramitJust.xml</span>
+        │   ├── <span class="file">listJustLangJust.xml</span>
+        │   ├── <span class="file">listJustLangApor.xml</span>
+        │   ├── <span class="file">confConvoLang.xml</span>
+        │   ├── <span class="file">justMigracions.xml</span>
+        │   ├── <span class="file">readXMLCospe.xml</span>
+        │   └── <span class="file">confConvoLangWS.xml</span>
+        ├── <span class="dir">golden/</span>              <span class="note"># Respuestas de referencia (commitalas)</span>
+        │   ├── <span class="file">confJustLang.xml</span>
+        │   └── <span class="file">...</span>
+        ├── <span class="file">confJustLang.feature</span>
+        ├── <span class="file">queryAggTramit.feature</span>
+        ├── <span class="file">queryAggTramitLang.feature</span>
+        ├── <span class="file">queryAggTramitJust.feature</span>
+        ├── <span class="file">listJustLangJust.feature</span>
+        ├── <span class="file">listJustLangApor.feature</span>
+        ├── <span class="file">confConvoLang.feature</span>
+        ├── <span class="file">justMigracions.feature</span>
+        ├── <span class="file">readXMLCospe.feature</span>
+        └── <span class="file">confConvoLangWS.feature</span>
+  </div>
+
+  <!-- ── AÑADIR TEST ────────────────────────────────────── -->
+  <h2 id="añadir-test">Añadir un nuevo test</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <strong>Crea el request XML</strong>
+        Copia el body SOAP de SoapUI y guárdalo en <code>src/test/java/tscat/soap/requests/miOperacion.xml</code>.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <strong>Crea el feature</strong>
+        Copia cualquier <code>.feature</code> existente, actualiza <code>goldenFile</code>, la URL (<code>soapWsUrl</code> o <code>soapGfUrl</code>) y el <code>request</code>.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <strong>Graba el golden file</strong>
+        <code>mvn test -Dtest=SoapTest -Dmode=record -Dkarate.options="classpath:tscat/soap/miOperacion.feature"</code>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <strong>Commitea el golden file</strong>
+        El fichero de <code>golden/</code> es parte del código fuente — sin él, el test no puede comparar.
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Generado para el proyecto <strong>tscattestapi</strong> · Karate 1.4.1 · Entorno: preprod
+  </footer>
+
+</main>
+</body>
+</html>

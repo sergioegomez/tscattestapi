@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:out="http://www.outsystems.com">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <out:aggregator>
+         <out:Operation>queryAggTramitLang</out:Operation>
+         <out:InputJSON>{codiTramit:"TRI004", idioma:"CATALA"}</out:InputJSON>
+      </out:aggregator>
+   </soapenv:Body>
+</soapenv:Envelope>

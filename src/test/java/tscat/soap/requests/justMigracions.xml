@@ -1,0 +1,27 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:out="http://www.outsystems.com" xmlns:ser="http://gencat.net/scsp/esquemes/productes/gf/serveinegoci">
+<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"/>
+<soapenv:Header/>
+<soapenv:Body>
+<ser:ServeiNegociPeticio>
+<ser:Capcalera>
+<ser:NomServei>consultaBO</ser:NomServei>
+<ser:IdPeticio>GSITGF-PRTAI2-JUST-2018</ser:IdPeticio>
+<ser:CodiTramit>PRTAI2</ser:CodiTramit>
+<ser:CodiModalitat>JUST</ser:CodiModalitat>
+<ser:VersioFormulari>2018</ser:VersioFormulari>
+<ser:Idioma>ca_ES</ser:Idioma>
+</ser:Capcalera>
+<ser:Cos>
+<cbo:peticio_consultaBo xmlns:cbo="http://gencat.net/scsp/esquemes/productes/consultesBo">
+<cbo:idConsultaBo>TSCATPRETAI</cbo:idConsultaBo>
+<cbo:consultaBo>
+<out:aggregator xmlns:out="http://www.outsystems.com">
+<out:Operation>justMigracions</out:Operation>
+<out:InputJSON>{codiExpedient:"CLT320/25/000001", idioma:"CATALA"}</out:InputJSON>
+</out:aggregator>
+</cbo:consultaBo>
+</cbo:peticio_consultaBo>
+</ser:Cos>
+</ser:ServeiNegociPeticio>
+</soapenv:Body>
+</soapenv:Envelope>

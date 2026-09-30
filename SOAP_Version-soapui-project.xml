@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="cfc73cd2-6a65-4912-954f-b701fb26f962" activeEnvironment="Default" name="SOAP_Version" resourceRoot="${projectDir}" soapui-version="5.7.2" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="4a3bda2b-1d7d-4d36-abcb-16d54e8be914" wsaVersion="NONE" name="GSITWebServiceSoap" type="wsdl" bindingName="{http://TSCAT_GSIT_API/GSITWebService/}GSITWebServiceSoap" soapVersion="1_1" anonymous="optional" definition="https://desenvolupament.out.apps.gencat.cat/TSCAT_GSIT_API/GSITWebService.asmx?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://desenvolupament.out.apps.gencat.cat/TSCAT_GSIT_API/GSITWebService.asmx?WSDL"><con:part><con:url>https://desenvolupament.out.apps.gencat.cat/TSCAT_GSIT_API/GSITWebService.asmx?WSDL</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://TSCAT_GSIT_API/GSITWebService/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://TSCAT_GSIT_API/GSITWebService/" xmlns:s0="http://www.outsystems.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>Service agregator for GSIT</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.outsystems.com">
+      <s:element name="aggregator">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Operation" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="InputJSON" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="aggregatorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Response" type="s0:GSIT_TSCAT_Out_V3"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GSIT_TSCAT_Out_V3">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="result" type="s0:str_resultat"/>
+          <s:element minOccurs="0" maxOccurs="1" name="agrupador" type="s0:str_agrupador"/>
+          <s:element minOccurs="0" maxOccurs="1" name="configuracionsJustificacionsIdioma" type="s0:str_configuracionsJustificacionsIdioma_Out"/>
+          <s:element minOccurs="0" maxOccurs="1" name="agrupadorItem" type="s0:ArrayOfStr_agrupadorItem"/>
+          <s:element minOccurs="0" maxOccurs="1" name="justificacionsIdioma" type="s0:justificacionsIdioma"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cercaExpedienteIdioma" type="s0:Str_cercaExpedienteIdiomaReturn"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_resultat">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="codi" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="missatge" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_agrupador">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="codi" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="anyAgrupador" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="nomAgrupador" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="dataCreacio" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="publicObjectiu" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="perfilSollicitant" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="signaturaSollicitant" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="sotmesAMinims" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="dadesBancaries" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="altresSubvencions" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="multibeneficiari" type="s:boolean"/>
+          <s:element minOccurs="0" maxOccurs="1" name="convocatories" type="s0:str_convocatories"/>
+          <s:element minOccurs="0" maxOccurs="1" name="dadesEspecifiques" type="s0:str_dadesEspecifiques"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_convocatories">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="convocatoria" type="s0:ArrayOfStr_convocatoria"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfStr_convocatoria">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="str_convocatoria" nillable="true" type="s0:str_convocatoria"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_convocatoria">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="codi" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="infoResum" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="descripcio" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="dadesEspecifiques" type="s0:str_dadesEspecifiques"/>
+          <s:element minOccurs="0" maxOccurs="1" name="tipusAccions" type="s0:str_tipusAccions"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_dadesEspecifiques">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="grupsAtributs" type="s0:str_grupsAtributs"/>
+          <s:element minOccurs="0" maxOccurs="1" name="declaros" type="s0:str_declaracions"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_grupsAtributs">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="grup" type="s0:ArrayOfStr_grup"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfStr_grup">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="str_grup" nillable="true" type="s0:str_grup"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_grup">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="descripcio" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="columnes" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="atributs" type="s0:str_atributs"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_atributs">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="atribut" type="s0:ArrayOfStr_atribut"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfStr_atribut">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="str_atribut" nillable="true" type="s0:str_atribut"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_atribut">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="codi" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="nom" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="descripcio" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="valor" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="tipus" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="quantificable" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="obligatori" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="indexable" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="valorable" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="visible" type="s:boolean"/>
+          <s:element minOccurs="0" maxOccurs="1" name="valorsLlista" type="s0:str_valorsLlista"/>
+          <s:element minOccurs="0" maxOccurs="1" name="validacions" type="s0:str_validacions"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_valorsLlista">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="valor" type="s0:ArrayOfStr_valorLlista"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfStr_valorLlista">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="str_valorLlista" nillable="true" type="s0:str_valorLlista"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_valorLlista">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="descripcio" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_validacions">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="validacio" type="s0:ArrayOfStr_validacio"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfStr_validacio">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="str_validacio" nillable="true" type="s0:str_validacio"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_validacio">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="tipus" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="parametres" type="s0:str_parametres"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_parametres">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="parametre" type="s0:ArrayOfStr_parametre"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfStr_parametre">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="str_parametre" nillable="true" type="s0:str_parametre"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_parametre">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="valor" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_declaracions">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="atribut" type="s0:ArrayOfStr_atribut"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_tipusAccions">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="tipusAccio" type="s0:ArrayOfStr_tipusAccio"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfStr_tipusAccio">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="str_tipusAccio" nillable="true" type="s0:str_tipusAccio"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_tipusAccio">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="codi" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="descripcio" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="requereixSollicitat" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="requereixPressupost" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="permetreSollicitatZero" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="permetrePressupostZero" type="s:boolean"/>
+          <s:element minOccurs="0" maxOccurs="1" name="percentatgeSubvencionable" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="percentatgeSollicitable" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="conjuntAtributs" type="s0:str_conjuntAtributs"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_conjuntAtributs">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="nom" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="descripcio" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="columnes" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="atributs" type="s0:str_atributs"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_configuracionsJustificacionsIdioma_Out">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="idCondiguracio" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="codi" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="descripcio" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="plantilla" type="s:base64Binary"/>
+          <s:element minOccurs="0" maxOccurs="1" name="aportacio" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="plaVerificacio" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="informeAuditors" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="declaracioResponsable" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfStr_agrupadorItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="str_agrupadorItem" nillable="true" type="s0:str_agrupadorItem"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_agrupadorItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="codi" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="descripcio" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="dataCreacio" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="justificacionsIdioma">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="actionList" type="s0:ArrayOfStr_accio"/>
+          <s:element minOccurs="0" maxOccurs="1" name="person" type="s0:str_persones"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfStr_accio">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="str_accio" nillable="true" type="s0:str_accio"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_accio">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="codi" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="descripcio" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="infoResum" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="importAtorgatActual" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="importAJustificar" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="importPresupost" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="atributsAtorgats" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_persones">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="solicitant" type="s0:str_persona"/>
+          <s:element minOccurs="0" maxOccurs="1" name="beneficiari" type="s0:str_persona"/>
+          <s:element minOccurs="0" maxOccurs="1" name="representant" type="s0:str_persona"/>
+          <s:element minOccurs="0" maxOccurs="1" name="notificant" type="s0:str_persona"/>
+          <s:element minOccurs="0" maxOccurs="1" name="contacte" type="s0:str_persona"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_persona">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="nomRaoSocial" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cognom1" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="tipusDocument" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="numeroDocument" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="mobil" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="correu" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="codiPais" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="codiProvincia" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="codiMunicipi" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="codiComarca" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="tipusVia" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="direccioPostal" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="numero" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="codiPostal" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Str_cercaExpedienteIdiomaReturn">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="resultat" type="s0:str_resultat"/>
+          <s:element minOccurs="0" maxOccurs="1" name="expedient" type="s0:Str_expedient"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Str_expedient">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="codi" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="subvencio" type="s0:Str_subvencio"/>
+          <s:element minOccurs="0" maxOccurs="1" name="persones" type="s0:str_persones"/>
+          <s:element minOccurs="0" maxOccurs="1" name="retencionsActives" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="configuracionsJustificacionsIdioma" type="s0:str_configuracionsJustificacionsIdioma_Out"/>
+          <s:element minOccurs="0" maxOccurs="1" name="tipusAccio" type="s0:str_tipusAccioCercaExpedienteLang"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Str_subvencio">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Codi" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Descripcio" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="str_tipusAccioCercaExpedienteLang">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="codi" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="descripcio" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="infoResum" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="conjuntAtributs" type="s0:str_conjuntAtributs"/>
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="aggregatorSoapIn">
+    <wsdl:part name="parameters" element="s0:aggregator"/>
+  </wsdl:message>
+  <wsdl:message name="aggregatorSoapOut">
+    <wsdl:part name="parameters" element="s0:aggregatorResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="GSITWebServiceSoap">
+    <wsdl:operation name="aggregator">
+      <wsdl:documentation>Aggregator method that will execute operation by their identifier</wsdl:documentation>
+      <wsdl:input message="tns:aggregatorSoapIn"/>
+      <wsdl:output message="tns:aggregatorSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GSITWebServiceSoap" type="tns:GSITWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="aggregator">
+      <soap:operation soapAction="http://TSCAT_GSIT_API/GSITWebService/aggregator" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GSITWebServiceSoap12" type="tns:GSITWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="aggregator">
+      <soap12:operation soapAction="http://TSCAT_GSIT_API/GSITWebService/aggregator" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GSITWebService">
+    <wsdl:documentation>Service agregator for GSIT</wsdl:documentation>
+    <wsdl:port name="GSITWebServiceSoap" binding="tns:GSITWebServiceSoap">
+      <soap:address location="https://desenvolupament.out.apps.gencat.cat/TSCAT_GSIT_API/GSITWebService.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="GSITWebServiceSoap12" binding="tns:GSITWebServiceSoap12">
+      <soap12:address location="https://desenvolupament.out.apps.gencat.cat/TSCAT_GSIT_API/GSITWebService.asmx"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://desenvolupament.out.apps.gencat.cat/TSCAT_GSIT_API/GSITWebService.asmx</con:endpoint></con:endpoints><con:operation id="2633c1e9-8e41-4691-b512-2aeb78a037ee" isOneWay="false" action="http://TSCAT_GSIT_API/GSITWebService/aggregator" name="aggregator" bindingOperationName="aggregator" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="81596bb0-e6c1-47d0-8d90-58229278130c" name="confJustLang"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://configuracio.ovt.gencat.cat/gsitgf/AppJava/services/GestorFormularis</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:out="http://www.outsystems.com" xmlns:ser="http://gencat.net/scsp/esquemes/productes/gf/serveinegoci" >
+<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"/> 
+<soapenv:Header/>
+<soapenv:Body>
+<ser:ServeiNegociPeticio>
+<ser:Capcalera>
+<ser:NomServei>consultaBO</ser:NomServei>
+<ser:IdPeticio>GSITGF-PRTAI2-JUST-2018</ser:IdPeticio>
+<ser:CodiTramit>PRTAI2</ser:CodiTramit>
+<ser:CodiModalitat>JUST</ser:CodiModalitat>
+<ser:VersioFormulari>2018</ser:VersioFormulari>
+<ser:Idioma>CATALA</ser:Idioma>
+</ser:Capcalera>
+<ser:Cos>
+<cbo:peticio_consultaBo xmlns:cbo="http://gencat.net/scsp/esquemes/productes/consultesBo">
+<cbo:idConsultaBo>TSCATPROTAI</cbo:idConsultaBo>
+<cbo:consultaBo>	
+      <out:aggregator>\r
+         <!--Optional:-->\r
+         <out:Operation>confConvoLang</out:Operation>\r
+         <!--Optional:-->\r
+         <out:InputJSON>{codiConvocatoria:"", codiAgrupador:"AG_EMT0059/0001_0001", idioma:"CATALA"}</out:InputJSON>\r
+      </out:aggregator>\r
+</cbo:consultaBo>
+</cbo:peticio_consultaBo>
+</ser:Cos>
+</ser:ServeiNegociPeticio>
+</soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://TSCAT_GSIT_API/GSITWebService/aggregator"/><con:wsrmConfig version="1.2"/></con:call><con:call id="c7c69e8d-a512-4d7e-ae6e-c3e6a35fed4e" name="queryAggTramit"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://configuracio.ovt.gencat.cat/gsitgf/AppJava/services/GestorFormularis</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:out="http://www.outsystems.com" xmlns:ser="http://gencat.net/scsp/esquemes/productes/gf/serveinegoci" >
+<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"/> 
+<soapenv:Header/>
+<soapenv:Body>
+<ser:ServeiNegociPeticio>
+<ser:Capcalera>
+<ser:NomServei>consultaBO</ser:NomServei>
+<ser:IdPeticio>GSITGF-PRTAI2-JUST-2018</ser:IdPeticio>
+<ser:CodiTramit>PRTAI2</ser:CodiTramit>
+<ser:CodiModalitat>JUST</ser:CodiModalitat>
+<ser:VersioFormulari>2018</ser:VersioFormulari>
+<ser:Idioma>ca_ES</ser:Idioma>
+</ser:Capcalera>
+<ser:Cos>
+<cbo:peticio_consultaBo xmlns:cbo="http://gencat.net/scsp/esquemes/productes/consultesBo">
+<cbo:idConsultaBo>TSCATPRETAI</cbo:idConsultaBo>
+<cbo:consultaBo>			
+<out:aggregator >
+<out:Operation>queryAggTramit</out:Operation>
+<out:InputJSON>{codiTramit:"COSPE1", idioma:"CATALA"}</out:InputJSON>
+</out:aggregator>
+</cbo:consultaBo>
+</cbo:peticio_consultaBo>
+</ser:Cos>
+</ser:ServeiNegociPeticio>
+</soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://TSCAT_GSIT_API/GSITWebService/aggregator"/><con:wsrmConfig version="1.2"/></con:call><con:call id="80816a2a-26ec-4123-abdc-99473ae5a919" name="queryAggTramitLang"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://desenvolupament.out.apps.gencat.cat/TSCAT_GSIT_API/GSITWebService.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:out="http://www.outsystems.com">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <out:aggregator>\r
+         <!--Optional:-->\r
+         <out:Operation>queryAggTramitLang</out:Operation>\r
+         <!--Optional:-->\r
+         <out:InputJSON>{codiTramit:"TRI004", idioma:"CATALA"}</out:InputJSON>\r
+      </out:aggregator>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://TSCAT_GSIT_API/GSITWebService/aggregator"/><con:wsrmConfig version="1.2"/></con:call><con:call id="0e2ad4fc-7959-41d5-a426-57e675f70c97" name="queryAggTramitJust"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://configuracio.ovt.gencat.cat/gsitgf/AppJava/services/GestorFormularis</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:out="http://www.outsystems.com" xmlns:ser="http://gencat.net/scsp/esquemes/productes/gf/serveinegoci" >
+<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"/> 
+<soapenv:Header/>
+<soapenv:Body>
+<ser:ServeiNegociPeticio>
+<ser:Capcalera>
+<ser:NomServei>consultaBO</ser:NomServei>
+<ser:IdPeticio>GSITGF-PRTAI2-JUST-2018</ser:IdPeticio>
+<ser:CodiTramit>PRTAI2</ser:CodiTramit>
+<ser:CodiModalitat>JUST</ser:CodiModalitat>
+<ser:VersioFormulari>2018</ser:VersioFormulari>
+<ser:Idioma>CATALA</ser:Idioma>
+</ser:Capcalera>
+<ser:Cos>
+<cbo:peticio_consultaBo xmlns:cbo="http://gencat.net/scsp/esquemes/productes/consultesBo">
+<cbo:idConsultaBo>TSCATPRETAI</cbo:idConsultaBo>
+<cbo:consultaBo>			
+<out:aggregator >
+<out:Operation>queryAggTramitJust</out:Operation>
+<out:InputJSON>{codiConvocatoria:"", codiAgrupador:"", codiTramit:"TSCAT0", idioma:"CATALA"}</out:InputJSON>
+</out:aggregator>
+</cbo:consultaBo>
+</cbo:peticio_consultaBo>
+</ser:Cos>
+</ser:ServeiNegociPeticio>
+</soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://TSCAT_GSIT_API/GSITWebService/aggregator"/><con:wsrmConfig version="1.2"/></con:call><con:call id="0ed61db0-9dd4-4aa8-b4c0-eaa7335b73ef" name="listJustLang - JUST exp"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://configuracio.ovt.gencat.cat/gsitgf/AppJava/services/GestorFormularis</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:out="http://www.outsystems.com" xmlns:ser="http://gencat.net/scsp/esquemes/productes/gf/serveinegoci" >
+<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"/> 
+<soapenv:Header/>
+<soapenv:Body>
+<ser:ServeiNegociPeticio>
+<ser:Capcalera>
+<ser:NomServei>consultaBO</ser:NomServei>
+<ser:IdPeticio>GSITGF-PRTAI2-JUST-2018</ser:IdPeticio>
+<ser:CodiTramit>PRTAI2</ser:CodiTramit>
+<ser:CodiModalitat>JUST</ser:CodiModalitat>
+<ser:VersioFormulari>2018</ser:VersioFormulari>
+<ser:Idioma>CATALA</ser:Idioma>
+</ser:Capcalera>
+<ser:Cos>
+<cbo:peticio_consultaBo xmlns:cbo="http://gencat.net/scsp/esquemes/productes/consultesBo">
+	<cbo:idConsultaBo>TSCATPRETAI</cbo:idConsultaBo>
+	<cbo:consultaBo>			
+	<out:aggregator >
+	<out:Operation>listJustLang</out:Operation>
+	<out:InputJSON>{codiExpedient:"ECF_2025_00003677_000000087", numIdentificacio:"00000000T",  codiTramit:"TSCAT3", tipoTramit:"JUST", idioma:"CATALA"}</out:InputJSON>
+	</out:aggregator>
+	</cbo:consultaBo>
+</cbo:peticio_consultaBo>
+</ser:Cos>
+</ser:ServeiNegociPeticio>
+</soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://TSCAT_GSIT_API/GSITWebService/aggregator"/><con:wsrmConfig version="1.2"/></con:call><con:call id="d1a4801f-90ea-43f8-8ef7-618682ecd85b" name="lisstJustLang - APOR exp"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://configuracio.ovt.gencat.cat/gsitgf/AppJava/services/GestorFormularis</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:out="http://www.outsystems.com" xmlns:ser="http://gencat.net/scsp/esquemes/productes/gf/serveinegoci" >
+<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"/> 
+<soapenv:Header/>
+<soapenv:Body>
+<ser:ServeiNegociPeticio>
+<ser:Capcalera>
+<ser:NomServei>consultaBO</ser:NomServei>
+<ser:IdPeticio>GSITGF-PRTAI2-JUST-2018</ser:IdPeticio>
+<ser:CodiTramit>PRTAI2</ser:CodiTramit>
+<ser:CodiModalitat>JUST</ser:CodiModalitat>
+<ser:VersioFormulari>2018</ser:VersioFormulari>
+<ser:Idioma>CATALA</ser:Idioma>
+</ser:Capcalera>
+<ser:Cos>
+<cbo:peticio_consultaBo xmlns:cbo="http://gencat.net/scsp/esquemes/productes/consultesBo">
+<cbo:idConsultaBo>TSCATPRETAI</cbo:idConsultaBo>
+<cbo:consultaBo>			
+<out:aggregator >
+<out:Operation>listJustLang</out:Operation>
+<out:InputJSON>{codiExpedient:"EMT_2025_00000091_000000038", numIdentificacio:"Q0000000J", codiTramit:"TSCAT4", idioma:"CATALA", tipoTramit:"APOR"}</out:InputJSON>
+</out:aggregator>
+</cbo:consultaBo>
+</cbo:peticio_consultaBo>
+</ser:Cos>
+</ser:ServeiNegociPeticio>
+</soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://TSCAT_GSIT_API/GSITWebService/aggregator"/><con:wsrmConfig version="1.2"/></con:call><con:call id="193bb950-ba19-41ed-860c-a83bf0b1c860" name="confConvoLang"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://configuracio.ovt.gencat.cat/gsitgf/AppJava/services/GestorFormularis</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:out="http://www.outsystems.com" xmlns:ser="http://gencat.net/scsp/esquemes/productes/gf/serveinegoci" >
+<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"/> 
+<soapenv:Header/>
+<soapenv:Body>
+<ser:ServeiNegociPeticio>
+<ser:Capcalera>
+<ser:NomServei>consultaBO</ser:NomServei>
+<ser:IdPeticio>GSITGF-PRTAI2-JUST-2018</ser:IdPeticio>
+<ser:CodiTramit>PRTAI2</ser:CodiTramit>
+<ser:CodiModalitat>JUST</ser:CodiModalitat>
+<ser:VersioFormulari>2018</ser:VersioFormulari>
+<ser:Idioma>ca_ES</ser:Idioma>
+</ser:Capcalera>
+<ser:Cos>
+	<cbo:peticio_consultaBo xmlns:cbo="http://gencat.net/scsp/esquemes/productes/consultesBo">
+		<cbo:idConsultaBo>TSCATPRETAI</cbo:idConsultaBo>
+		<cbo:consultaBo>
+			<out:aggregator xmlns:out="http://www.outsystems.com">
+				<out:Operation>confConvoLang</out:Operation>
+				<out:InputJSON>{codiConvocatoria:"", codiAgrupador:"AG_ECF0003/0683_0001", codiTramit:"TSCAT9", idioma:"CATALA"}</out:InputJSON>
+			</out:aggregator>
+		</cbo:consultaBo>
+	</cbo:peticio_consultaBo>
+</ser:Cos>
+</ser:ServeiNegociPeticio>
+</soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://TSCAT_GSIT_API/GSITWebService/aggregator"/><con:wsrmConfig version="1.2"/></con:call><con:call id="9fdc9838-a364-46e7-8fb9-b21716567904" name="justMigracions"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://configuracio.ovt.gencat.cat/gsitgf/AppJava/services/GestorFormularis</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:out="http://www.outsystems.com" xmlns:ser="http://gencat.net/scsp/esquemes/productes/gf/serveinegoci" >
+<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"/> 
+<soapenv:Header/>
+<soapenv:Body>
+<ser:ServeiNegociPeticio>
+<ser:Capcalera>
+<ser:NomServei>consultaBO</ser:NomServei>
+<ser:IdPeticio>GSITGF-PRTAI2-JUST-2018</ser:IdPeticio>
+<ser:CodiTramit>PRTAI2</ser:CodiTramit>
+<ser:CodiModalitat>JUST</ser:CodiModalitat>
+<ser:VersioFormulari>2018</ser:VersioFormulari>
+<ser:Idioma>ca_ES</ser:Idioma>
+</ser:Capcalera>
+<ser:Cos>
+	<cbo:peticio_consultaBo xmlns:cbo="http://gencat.net/scsp/esquemes/productes/consultesBo">
+		<cbo:idConsultaBo>TSCATPRETAI</cbo:idConsultaBo>
+		<cbo:consultaBo>
+			<out:aggregator xmlns:out="http://www.outsystems.com">
+				<out:Operation>justMigracions</out:Operation>
+				<out:InputJSON>{codiExpedient:"CLT320/25/000001", idioma:"CATALA"}</out:InputJSON>
+			</out:aggregator>
+		</cbo:consultaBo>
+	</cbo:peticio_consultaBo>
+</ser:Cos>
+</ser:ServeiNegociPeticio>
+</soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://TSCAT_GSIT_API/GSITWebService/aggregator"/><con:wsrmConfig version="1.2"/></con:call><con:call id="3fc79754-e76c-449c-93ea-53c50efdeb1b" name="readXML"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://configuracio.ovt.gencat.cat/gsitgf/AppJava/services/GestorFormularis</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:out="http://www.outsystems.com" xmlns:ser="http://gencat.net/scsp/esquemes/productes/gf/serveinegoci" >
+<wsse:Security xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"/> 
+<soapenv:Header/>
+<soapenv:Body>
+<ser:ServeiNegociPeticio>
+<ser:Capcalera>
+<ser:NomServei>consultaBO</ser:NomServei>
+<ser:IdPeticio>GSITGF-PRTAI2-JUST-2018</ser:IdPeticio>
+<ser:CodiTramit>PRTAI2</ser:CodiTramit>
+<ser:CodiModalitat>JUST</ser:CodiModalitat>
+<ser:VersioFormulari>2018</ser:VersioFormulari>
+<ser:Idioma>ca_ES</ser:Idioma>
+</ser:Capcalera>
+<ser:Cos>
+	<cbo:peticio_consultaBo xmlns:cbo="http://gencat.net/scsp/esquemes/productes/consultesBo">
+		<cbo:idConsultaBo>TSCATPRETAI</cbo:idConsultaBo>
+		<cbo:consultaBo>
+			<out:aggregator xmlns:out="http://www.outsystems.com">
+				<out:Operation>leerXMLCospe</out:Operation>
+			</out:aggregator>
+		</cbo:consultaBo>
+	</cbo:peticio_consultaBo>
+</ser:Cos>
+</ser:ServeiNegociPeticio>
+</soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://TSCAT_GSIT_API/GSITWebService/aggregator"/><con:wsrmConfig version="1.2"/></con:call><con:call id="72efc4e1-cfbc-483a-8da6-c36c57b5a59f" name="confConvoLang WS"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://preproduccio.eco.out.apps.gencat.cat/TSCAT_GSIT_API/GSITWebService.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:out="http://www.outsystems.com">
+<soapenv:Header/>
+<soapenv:Body>
+<out:aggregator>
+<out:Operation>confConvoLang</out:Operation>
+<out:InputJSON>{codiAgrupador:"AG_ECF0003/0683_0001",codiConvocatoria:"SLT_2026_00000462", codiTramit:"TSCAT9", idioma:"CATALA"}</out:InputJSON>
+</out:aggregator>
+</soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://TSCAT_GSIT_API/GSITWebService/aggregator"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:RestService" id="39a51a48-b649-4e16-99b7-df420734248c" wadlVersion="http://wadl.dev.java.net/2009/02" name="SOAP_Version" type="rest" definitionUrl="504" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints/></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

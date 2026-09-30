@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://gencat.net/scsp/esquemes/productes/gf/serveinegoci" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  	
+  <SOAP-ENV:Body>
+    		
+    <tns:ServeiNegociResposta>
+      			
+      <tns:Capcalera>
+        				
+        <tns:NomServei>consultaBO</tns:NomServei>
+        				
+        <tns:IdPeticio>GSITGF-PRTAI2-JUST-2018</tns:IdPeticio>
+        				
+        <tns:CodiTramit>PRTAI2</tns:CodiTramit>
+        			    
+        <tns:CodiModalitat>JUST</tns:CodiModalitat>
+        			    
+        <tns:VersioFormulari>2018</tns:VersioFormulari>
+        			    
+        <tns:Idioma>CATALA</tns:Idioma>
+        			
+      </tns:Capcalera>
+      			
+      <tns:Cos>	
+				&lt;www.outsystems.com:aggregatorResponse xmlns:www.outsystems.com="http://www.outsystems.com" &gt;
+               &lt;www.outsystems.com:Response&gt;
+                  &lt;www.outsystems.com:result&gt;
+                     &lt;www.outsystems.com:codi&gt;9001&lt;/www.outsystems.com:codi&gt;
+                     &lt;www.outsystems.com:missatge&gt;Falten paràmetres en la consulta&lt;/www.outsystems.com:missatge&gt;
+                  &lt;/www.outsystems.com:result&gt;
+                  &lt;www.outsystems.com:agrupador&gt;
+                     &lt;www.outsystems.com:codi /&gt;
+                     &lt;www.outsystems.com:anyAgrupador /&gt;
+                     &lt;www.outsystems.com:nomAgrupador /&gt;
+                     &lt;www.outsystems.com:dataCreacio /&gt;
+                     &lt;www.outsystems.com:publicObjectiu /&gt;
+                     &lt;www.outsystems.com:perfilSollicitant /&gt;
+                     &lt;www.outsystems.com:signaturaSollicitant /&gt;
+                     &lt;www.outsystems.com:sotmesAMinims&gt;false&lt;/www.outsystems.com:sotmesAMinims&gt;
+                     &lt;www.outsystems.com:dadesBancaries&gt;false&lt;/www.outsystems.com:dadesBancaries&gt;
+                     &lt;www.outsystems.com:altresSubvencions&gt;false&lt;/www.outsystems.com:altresSubvencions&gt;
+                     &lt;www.outsystems.com:multibeneficiari&gt;false&lt;/www.outsystems.com:multibeneficiari&gt;
+                     &lt;www.outsystems.com:convocatories&gt;
+                        &lt;www.outsystems.com:convocatoria /&gt;
+                     &lt;/www.outsystems.com:convocatories&gt;
+                     &lt;www.outsystems.com:dadesEspecifiques&gt;
+                        &lt;www.outsystems.com:grupsAtributs&gt;
+                           &lt;www.outsystems.com:grup /&gt;
+                        &lt;/www.outsystems.com:grupsAtributs&gt;
+                        &lt;www.outsystems.com:declaros&gt;
+                           &lt;www.outsystems.com:atribut /&gt;
+                        &lt;/www.outsystems.com:declaros&gt;
+                     &lt;/www.outsystems.com:dadesEspecifiques&gt;
+                  &lt;/www.outsystems.com:agrupador&gt;
+                  &lt;www.outsystems.com:agrupadorItem /&gt;
+                  &lt;www.outsystems.com:justificacionsIdioma&gt;
+                     &lt;www.outsystems.com:actionList&gt;
+                        &lt;www.outsystems.com:id /&gt;
+                        &lt;www.outsystems.com:codi /&gt;
+                        &lt;www.outsystems.com:descripcio /&gt;
+                        &lt;www.outsystems.com:infoResum /&gt;
+                        &lt;www.outsystems.com:importAtorgatActual&gt;0&lt;/www.outsystems.com:importAtorgatActual&gt;
+                        &lt;www.outsystems.com:importAJustificar&gt;0&lt;/www.outsystems.com:importAJustificar&gt;
+                        &lt;www.outsystems.com:importPresupost&gt;0&lt;/www.outsystems.com:importPresupost&gt;
+                        &lt;www.outsystems.com:conjuntAtributs&gt;
+                           &lt;www.outsystems.com:nom /&gt;
+                           &lt;www.outsystems.com:descripcio /&gt;
+                           &lt;www.outsystems.com:columnes /&gt;
+                           &lt;www.outsystems.com:atributs&gt;
+                              &lt;www.outsystems.com:atribut /&gt;
+                           &lt;/www.outsystems.com:atributs&gt;
+                        &lt;/www.outsystems.com:conjuntAtributs&gt;
+                     &lt;/www.outsystems.com:actionList&gt;
+                     &lt;www.outsystems.com:person&gt;
+                        &lt;www.outsystems.com:solicitant&gt;
+                           &lt;www.outsystems.com:nomRaoSocial /&gt;
+                           &lt;www.outsystems.com:cognom1 /&gt;
+                           &lt;www.outsystems.com:tipusDocument /&gt;
+                           &lt;www.outsystems.com:numeroDocument /&gt;
+                           &lt;www.outsystems.com:mobil /&gt;
+                           &lt;www.outsystems.com:telefon /&gt;
+                           &lt;www.outsystems.com:correu /&gt;
+                           &lt;www.outsystems.com:codiPais /&gt;
+                           &lt;www.outsystems.com:codiProvincia /&gt;
+                           &lt;www.outsystems.com:codiMunicipi /&gt;
+                           &lt;www.outsystems.com:codiComarca /&gt;
+                           &lt;www.outsystems.com:tipusVia /&gt;
+                           &lt;www.outsystems.com:direccioPostal /&gt;
+                           &lt;www.outsystems.com:numero /&gt;
+                           &lt;www.outsystems.com:codiPostal /&gt;
+                           &lt;www.outsystems.com:codiEmissor /&gt;
+                        &lt;/www.outsystems.com:solicitant&gt;
+                        &lt;www.outsystems.com:beneficiari&gt;
+                           &lt;www.outsystems.com:nomRaoSocial /&gt;
+                           &lt;www.outsystems.com:cognom1 /&gt;
+                           &lt;www.outsystems.com:tipusDocument /&gt;
+                           &lt;www.outsystems.com:numeroDocument /&gt;
+                           &lt;www.outsystems.com:mobil /&gt;
+                           &lt;www.outsystems.com:telefon /&gt;
+                           &lt;www.outsystems.com:correu /&gt;
+                           &lt;www.outsystems.com:codiPais /&gt;
+                           &lt;www.outsystems.com:codiProvincia /&gt;
+                           &lt;www.outsystems.com:codiMunicipi /&gt;
+                           &lt;www.outsystems.com:codiComarca /&gt;
+                           &lt;www.outsystems.com:tipusVia /&gt;
+                           &lt;www.outsystems.com:direccioPostal /&gt;
+                           &lt;www.outsystems.com:numero /&gt;
+                           &lt;www.outsystems.com:codiPostal /&gt;
+                           &lt;www.outsystems.com:codiEmissor /&gt;
+                        &lt;/www.outsystems.com:beneficiari&gt;
+                        &lt;www.outsystems.com:representant&gt;
+                           &lt;www.outsystems.com:nomRaoSocial /&gt;
+                           &lt;www.outsystems.com:cognom1 /&gt;
+                           &lt;www.outsystems.com:tipusDocument /&gt;
+                           &lt;www.outsystems.com:numeroDocument /&gt;
+                           &lt;www.outsystems.com:mobil /&gt;
+                           &lt;www.outsystems.com:telefon /&gt;
+                           &lt;www.outsystems.com:correu /&gt;
+                           &lt;www.outsystems.com:codiPais /&gt;
+                           &lt;www.outsystems.com:codiProvincia /&gt;
+                           &lt;www.outsystems.com:codiMunicipi /&gt;
+                           &lt;www.outsystems.com:codiComarca /&gt;
+                           &lt;www.outsystems.com:tipusVia /&gt;
+                           &lt;www.outsystems.com:direccioPostal /&gt;
+                           &lt;www.outsystems.com:numero /&gt;
+                           &lt;www.outsystems.com:codiPostal /&gt;
+                           &lt;www.outsystems.com:codiEmissor /&gt;
+                        &lt;/www.outsystems.com:representant&gt;
+                        &lt;www.outsystems.com:notificant&gt;
+                           &lt;www.outsystems.com:nomRaoSocial /&gt;
+                           &lt;www.outsystems.com:cognom1 /&gt;
+                           &lt;www.outsystems.com:tipusDocument /&gt;
+                           &lt;www.outsystems.com:numeroDocument /&gt;
+                           &lt;www.outsystems.com:mobil /&gt;
+                           &lt;www.outsystems.com:telefon /&gt;
+                           &lt;www.outsystems.com:correu /&gt;
+                           &lt;www.outsystems.com:codiPais /&gt;
+                           &lt;www.outsystems.com:codiProvincia /&gt;
+                           &lt;www.outsystems.com:codiMunicipi /&gt;
+                           &lt;www.outsystems.com:codiComarca /&gt;
+                           &lt;www.outsystems.com:tipusVia /&gt;
+                           &lt;www.outsystems.com:direccioPostal /&gt;
+                           &lt;www.outsystems.com:numero /&gt;
+                           &lt;www.outsystems.com:codiPostal /&gt;
+                           &lt;www.outsystems.com:codiEmissor /&gt;
+                        &lt;/www.outsystems.com:notificant&gt;
+                        &lt;www.outsystems.com:contacte&gt;
+                           &lt;www.outsystems.com:nomRaoSocial /&gt;
+                           &lt;www.outsystems.com:cognom1 /&gt;
+                           &lt;www.outsystems.com:tipusDocument /&gt;
+                           &lt;www.outsystems.com:numeroDocument /&gt;
+                           &lt;www.outsystems.com:mobil /&gt;
+                           &lt;www.outsystems.com:telefon /&gt;
+                           &lt;www.outsystems.com:correu /&gt;
+                           &lt;www.outsystems.com:codiPais /&gt;
+                           &lt;www.outsystems.com:codiProvincia /&gt;
+                           &lt;www.outsystems.com:codiMunicipi /&gt;
+                           &lt;www.outsystems.com:codiComarca /&gt;
+                           &lt;www.outsystems.com:tipusVia /&gt;
+                           &lt;www.outsystems.com:direccioPostal /&gt;
+                           &lt;www.outsystems.com:numero /&gt;
+                           &lt;www.outsystems.com:codiPostal /&gt;
+                           &lt;www.outsystems.com:codiEmissor /&gt;
+                        &lt;/www.outsystems.com:contacte&gt;
+                     &lt;/www.outsystems.com:person&gt;
+                     &lt;www.outsystems.com:configuracionsJustificacionsIdioma&gt;
+                        &lt;www.outsystems.com:id /&gt;
+                        &lt;www.outsystems.com:idCondiguracio /&gt;
+                        &lt;www.outsystems.com:codi /&gt;
+                        &lt;www.outsystems.com:descripcio /&gt;
+                        &lt;www.outsystems.com:plantilla /&gt;
+                        &lt;www.outsystems.com:aportacio /&gt;
+                        &lt;www.outsystems.com:plaVerificacio /&gt;
+                        &lt;www.outsystems.com:informeAuditors /&gt;
+                        &lt;www.outsystems.com:declaracioResponsable /&gt;
+                     &lt;/www.outsystems.com:configuracionsJustificacionsIdioma&gt;
+                  &lt;/www.outsystems.com:justificacionsIdioma&gt;
+                  &lt;www.outsystems.com:expedientsMigracio /&gt;
+                  &lt;www.outsystems.com:definicioJson /&gt;
+               &lt;/www.outsystems.com:Response&gt;
+            &lt;/www.outsystems.com:aggregatorResponse&gt;
+			</tns:Cos>
+      			
+      <tns:Resposta>
+        				
+        <tns:CodiResposta>OK</tns:CodiResposta>
+        							
+      </tns:Resposta>
+      		
+    </tns:ServeiNegociResposta>
+    		
+	
+  </SOAP-ENV:Body>
+  
+</SOAP-ENV:Envelope>

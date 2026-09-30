@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:out="http://www.outsystems.com">
+<soapenv:Header/>
+<soapenv:Body>
+<out:aggregator>
+<out:Operation>confConvoLang</out:Operation>
+<out:InputJSON>{codiAgrupador:"AG_ECF0003/0683_0001",codiConvocatoria:"SLT_2026_00000462", codiTramit:"TSCAT9", idioma:"CATALA"}</out:InputJSON>
+</out:aggregator>
+</soapenv:Body>
+</soapenv:Envelope>
